@@ -1,0 +1,5 @@
+name: Quests
+main: io.chronicninjaz.quests.Quests
+version: 1.0.0
+author: ChronicNinjaz
+prefix: VexonQuests
