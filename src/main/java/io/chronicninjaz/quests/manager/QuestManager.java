@@ -2,6 +2,7 @@ package io.chronicninjaz.quests.manager;
 
 import io.chronicninjaz.quests.Quests;
 import io.chronicninjaz.quests.enums.QuestType;
+import io.chronicninjaz.quests.gui.QuestInformation;
 import io.chronicninjaz.quests.player.QuestPlayer;
 import io.chronicninjaz.quests.quest.Quest;
 import org.bukkit.Bukkit;
@@ -11,9 +12,13 @@ import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityInteractEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.world.ChunkUnloadEvent;
+import org.bukkit.inventory.EquipmentSlot;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -35,43 +40,31 @@ public class QuestManager implements Listener{
 
     @EventHandler
     public void onNPCClick(EntityDamageByEntityEvent event){
-
         if(event.getEntity() instanceof Villager){
             Quest quest = quests.stream().filter(q -> q.getVillager().getUniqueId() == event.getEntity().getUniqueId()).findFirst().orElse(null);
-
             if(quest != null){
                 event.setCancelled(true);
-
-
+                if(event.getDamager() instanceof Player){
+                    new QuestInformation(getQuestPlayer((Player) event.getDamager()));
+                }
             }
         }
+    }
 
+    @EventHandler
+    public void noNPCInventory(PlayerInteractEntityEvent event) {
+        if (event.getRightClicked() instanceof Villager)
+                if(event.getHand() == EquipmentSlot.HAND)
+                    if(quests.stream().filter(q -> q.getVillager().getUniqueId() == event.getRightClicked().getUniqueId()).findFirst().orElse(null) != null)
+                        event.setCancelled(true);
+    }
 
-        /**
-        if(event.getRightClicked() instanceof Villager){
-
-            event.getPlayer().sendMessage("clicked villager");
-            event.setCancelled(true);
-            Quest quest = quests.stream().filter(q -> q.getVillager().getUniqueId() == event.getRightClicked().getUniqueId()).findFirst().orElse(null);
-
-            if(quest != null){
-
-                QuestPlayer questPlayer = Quests.getInstance().getQuestManager().getQuestPlayer(event.getPlayer());
-
-                if(questPlayer != null){
-
-                }
-
-
-                /**
-                 *
-                 * check if player has already started the quest
-                 *
-                 * check if player has the ability to do more then one quest at the same time
-                 *
-                 * check to see if the player has the right amount of stuff the complete the quest
-                 *
-                 */
+    @EventHandler
+    public void chunkUnloadEvent(ChunkUnloadEvent event){
+        quests.stream().forEach(quest -> {
+            if(quest.getVillager().getLocation().getChunk() == event.getChunk())
+                event.setCancelled(true);
+        });
     }
 
     public void loadQuestPlayer(Player player){

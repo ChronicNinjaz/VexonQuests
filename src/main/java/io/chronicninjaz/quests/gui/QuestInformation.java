@@ -11,7 +11,7 @@ import org.bukkit.event.inventory.ClickType;
 public class QuestInformation extends MenuFactory {
 
     public QuestInformation(QuestPlayer questPlayer){
-        super("&6Quest Information", 3);
+        super("&cQuest Information", 3);
 
         addItem(new MenuItem(10, new ItemFactory(Material.DIAMOND).setLore(questPlayer.getQuestPoints() + " points.").build()){
 

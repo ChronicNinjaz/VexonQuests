@@ -41,6 +41,7 @@ public class Quest {
         this.villager.setCanPickupItems(false);
         this.villager.setGlowing(true);
         this.villager.setCustomName(ChatColor.translateAlternateColorCodes('&', displayName));
+        this.villager.setRemoveWhenFarAway(false);
 
         Quests.getInstance().getQuestManager().quests.add(this);
     }
