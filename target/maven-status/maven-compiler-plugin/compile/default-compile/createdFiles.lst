@@ -1,4 +1,5 @@
 io/chronicninjaz/quests/player/QuestPlayer.class
+io/chronicninjaz/quests/quest/Dialog.class
 io/chronicninjaz/quests/utils/gui/MenuFactory.class
 io/chronicninjaz/quests/utils/itemstack/SkullFactory.class
 io/chronicninjaz/quests/utils/gui/PageMenuFactory$1.class
@@ -16,4 +17,5 @@ io/chronicninjaz/quests/utils/ArrayUtil.class
 io/chronicninjaz/quests/utils/itemstack/Factory.class
 io/chronicninjaz/quests/manager/FileManager.class
 io/chronicninjaz/quests/utils/itemstack/ItemFactory.class
+io/chronicninjaz/quests/commands/AdminCommands.class
 io/chronicninjaz/quests/utils/gui/MenuItem.class

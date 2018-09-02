@@ -2,6 +2,7 @@ package io.chronicninjaz.quests.player;
 
 import io.chronicninjaz.quests.Quests;
 import io.chronicninjaz.quests.enums.QuestType;
+import io.chronicninjaz.quests.quest.Dialog;
 import org.bukkit.entity.Player;
 
 public class QuestPlayer {
@@ -10,13 +11,15 @@ public class QuestPlayer {
     private boolean questStarted;
     private double duration;
     private QuestType questType;
+    private Dialog dialog;
 
-    public QuestPlayer(Player player, int questPoints, boolean questStarted, double duration, QuestType type){
+    public QuestPlayer(Player player, int questPoints, boolean questStarted, double duration, QuestType type, Dialog dialog){
         this.player = player;
         this.questPoints = questPoints;
         this.questStarted = questStarted;
         this.duration = duration;
         this.questType = type;
+        this.dialog = dialog;
 
         Quests.getInstance().getQuestManager().players.add(this);
     }
@@ -63,5 +66,13 @@ public class QuestPlayer {
 
     public void setQuestType(QuestType questType) {
         this.questType = questType;
+    }
+
+    public Dialog getDialog() {
+        return dialog;
+    }
+
+    public void setDialog(Dialog dialog) {
+        this.dialog = dialog;
     }
 }

@@ -1,5 +1,6 @@
 package io.chronicninjaz.quests;
 
+import io.chronicninjaz.quests.commands.AdminCommands;
 import io.chronicninjaz.quests.manager.QuestManager;
 import io.chronicninjaz.quests.quest.FoodQuest;
 import io.chronicninjaz.quests.quest.Quest;
@@ -26,6 +27,8 @@ public class Quests extends JavaPlugin {
         }
 
         this.questManager = new QuestManager();
+
+        getCommand("questpoints").setExecutor(new AdminCommands());
 
         new FoodQuest();
 
