@@ -2,10 +2,8 @@ package io.chronicninjaz.quests;
 
 import io.chronicninjaz.quests.commands.AdminCommands;
 import io.chronicninjaz.quests.manager.QuestManager;
-import io.chronicninjaz.quests.quest.FoodQuest;
-import io.chronicninjaz.quests.quest.Quest;
+import io.chronicninjaz.quests.quest.tasks.FoodQuest;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;

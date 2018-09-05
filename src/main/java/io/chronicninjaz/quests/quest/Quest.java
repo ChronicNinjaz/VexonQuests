@@ -18,6 +18,7 @@ public class Quest {
     private ArrayList<String> displayLore;
     private double duration;
     private QuestType questType;
+    private Dialog dialog;
 
     /**
      * Villager data
@@ -25,7 +26,7 @@ public class Quest {
     private Villager villager;
     private Location spawn;
 
-    public Quest(int id, int questPoints, String displayName, ArrayList<String> displayLore, double duration, Location spawn, QuestType questType){
+    public Quest(int id, int questPoints, String displayName, ArrayList<String> displayLore, double duration, Location spawn, QuestType questType, Dialog dialog){
         this.id = id;
         this.questPoints = questPoints;
         this.displayName = displayName;
@@ -33,6 +34,7 @@ public class Quest {
         this.duration = duration;
         this.spawn = spawn;
         this.questType = questType;
+        this.dialog = dialog;
 
         this.villager = (Villager) spawn.getWorld().spawnEntity(spawn, EntityType.VILLAGER);
         this.villager.setAI(false);
@@ -108,5 +110,13 @@ public class Quest {
 
     public void setSpawn(Location spawn) {
         this.spawn = spawn;
+    }
+
+    public Dialog getDialog() {
+        return dialog;
+    }
+
+    public void setDialog(Dialog dialog){
+        this.dialog = dialog;
     }
 }

@@ -8,7 +8,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerQuitEvent;
 
 public class AdminCommands implements CommandExecutor {
 
@@ -27,7 +26,7 @@ public class AdminCommands implements CommandExecutor {
                             Player target = Bukkit.getPlayer(args[1]);
 
                             if(target == null){
-                                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&7VexonQuest&7] &eCouldn't find &c" + args[1] + " &e! Please try &canother &euser!"));
+                                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&7VexonQuest&7] &eCouldn't find &c" + args[1] + "&e! Please try &canother &euser!"));
                                 return false;
                             }
 
@@ -36,6 +35,8 @@ public class AdminCommands implements CommandExecutor {
 
                             if(qp != null && points > 0){
                                 qp.setQuestPoints(qp.getQuestPoints() + points);
+                                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&7VexonQuest&7] &aYou have successfully added &c" + points + " &apoints to &c" + target.getName() + "'s &aaccount."));
+                                return true;
                             }
 
                             break;
@@ -43,7 +44,7 @@ public class AdminCommands implements CommandExecutor {
                             Player target = Bukkit.getPlayer(args[1]);
 
                             if(target == null){
-                                player.sendMessage("&7[&7VexonQuest&7] &eCouldn't find &c" + args[1] + " &e! Please try &canother &euser!");
+                                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&7VexonQuest&7] &eCouldn't find &c" + args[1] + "&e! Please try &canother &euser!"));
                                 return false;
                             }
 
@@ -52,6 +53,8 @@ public class AdminCommands implements CommandExecutor {
 
                             if(qp != null){
                                 qp.setQuestPoints(points);
+                                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&7VexonQuest&7] &aYou have successfully set &c" + target.getName() + " &aquest points to &c" + points + "&a."));
+                                return true;
                             }
 
                             break;
@@ -67,6 +70,8 @@ public class AdminCommands implements CommandExecutor {
     }
 
     public void sendHelpPage(Player player){
-        player.sendMessage();
+        player.sendMessage("================================");
+
+        player.sendMessage("================================");
     }
 }

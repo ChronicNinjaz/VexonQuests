@@ -6,6 +6,7 @@ import io.chronicninjaz.quests.gui.QuestInformation;
 import io.chronicninjaz.quests.player.QuestPlayer;
 import io.chronicninjaz.quests.quest.Dialog;
 import io.chronicninjaz.quests.quest.Quest;
+import io.chronicninjaz.quests.utils.textbutton.TextButton;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -47,9 +48,18 @@ public class QuestManager implements Listener{
                 event.setCancelled(true);
                 if(event.getDamager() instanceof Player){
 
-                    // new QuestInformation(getQuestPlayer((Player) event.getDamager()));
+                    QuestPlayer qp = getQuestPlayer((Player)event.getDamager());
 
-                    // start dialog
+                    if(qp.getDialog() != null){
+
+                        qp.setDialog(quest.getDialog());
+                        qp.getDialog().sendDialog(qp.getPlayer());
+
+                    }
+                    else {
+                        qp.getDialog().sendDialog(qp.getPlayer());
+                    }
+
                 }
             }
         }
@@ -87,7 +97,7 @@ public class QuestManager implements Listener{
         }
 
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
-        new QuestPlayer(player, config.getInt("questPoints"), config.getBoolean("questStarted"), config.getDouble("duration"), QuestType.getFromName(config.getString("questType")), new Dialog(false, null, 1));
+        new QuestPlayer(player, config.getInt("questPoints"), config.getBoolean("questStarted"), config.getDouble("duration"), QuestType.getFromName(config.getString("questType")), new Dialog(false, new ArrayList<>(), 0));
     }
 
     public void unloadQuestPlayer(Player player){
